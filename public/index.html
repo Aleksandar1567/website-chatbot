@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETF Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="chat-container">
+    <header class="chat-header">
+      <div class="avatar">🤖</div>
+      <div>
+        <h1>ETF Asistent</h1>
+        <p class="status"><span class="dot"></span>Online — zna sadržaj sa etf.bg.ac.rs</p>
+      </div>
+    </header>
+
+    <main id="chat" class="chat-messages">
+      <div class="message bot">
+        <div class="bubble">
+          Zdravo! 👋 Pitaj me bilo šta o Elektrotehničkom fakultetu u Beogradu —
+          upis, smerovi, predmeti, kontakt...
+        </div>
+      </div>
+    </main>
+
+    <form id="chat-form" class="chat-input">
+      <input
+        id="message-input"
+        type="text"
+        placeholder="Napiši poruku..."
+        autocomplete="off"
+        autofocus
+      />
+      <button type="submit" aria-label="Pošalji">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
