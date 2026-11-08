@@ -3,43 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ETF Chatbot</title>
+  <meta name="color-scheme" content="dark" />
+  <title>Website Chatbot</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="chat-container">
-    <header class="chat-header">
-      <div class="avatar">🤖</div>
-      <div>
-        <h1>ETF Asistent</h1>
-        <p class="status"><span class="dot"></span>Online — zna sadržaj sa etf.bg.ac.rs</p>
+  <main id="setup-view" class="setup-card">
+    <div class="setup-heading">
+      <div class="avatar" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
       </div>
+      <div>
+        <h1>Website Chatbot</h1>
+        <p class="muted">Unesi adresu sajta i API ključ. Bot sam pročita sajt i prilagodi se njegovoj temi.</p>
+      </div>
+    </div>
+
+    <form id="setup-form">
+      <label class="field">
+        <span>Adresa sajta</span>
+        <input id="site-url" type="text" inputmode="url" placeholder="npr. etf.bg.ac.rs" autocomplete="off" spellcheck="false" required autofocus />
+      </label>
+      <label class="field">
+        <span>API ključ</span>
+        <input id="api-key" type="password" placeholder="Gemini, Claude ili OpenAI" autocomplete="off" spellcheck="false" />
+      </label>
+      <p id="key-hint" class="hint">Provider se prepoznaje po ključu. Ključ se ne čuva, pa ga posle osvežavanja stranice unosiš ponovo.</p>
+
+      <details class="advanced">
+        <summary>Napredno</summary>
+        <label class="field">
+          <span>Provider</span>
+          <select id="provider">
+            <option value="">Automatski</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Model</span>
+          <input id="model" type="text" placeholder="Podrazumevani model" autocomplete="off" spellcheck="false" />
+        </label>
+        <label class="field">
+          <span>Koliko stranica da pročita</span>
+          <input id="max-pages" type="number" min="1" max="300" step="1" placeholder="60" />
+        </label>
+      </details>
+
+      <button id="setup-submit" class="primary" type="submit">Napravi bota</button>
+    </form>
+
+    <div id="setup-progress" class="progress" aria-live="polite" hidden>
+      <p id="progress-text"></p>
+      <progress id="progress-bar"></progress>
+    </div>
+    <p id="setup-error" class="error" role="alert" hidden></p>
+  </main>
+
+  <main id="chat-view" class="chat-container" hidden>
+    <header class="chat-header">
+      <div id="site-avatar" class="avatar" aria-hidden="true"></div>
+      <div class="chat-title">
+        <h1 id="site-name"></h1>
+        <p class="status"><span class="dot"></span><span id="site-status"></span></p>
+      </div>
+      <button id="change-site" class="ghost" type="button">Drugi sajt</button>
     </header>
 
-    <main id="chat" class="chat-messages">
-      <div class="message bot">
-        <div class="bubble">
-          Zdravo! 👋 Pitaj me bilo šta o Elektrotehničkom fakultetu u Beogradu —
-          upis, smerovi, predmeti, kontakt...
-        </div>
-      </div>
-    </main>
+    <div id="chat" class="chat-messages" aria-live="polite"></div>
 
     <form id="chat-form" class="chat-input">
-      <input
-        id="message-input"
-        type="text"
-        placeholder="Napiši poruku..."
-        autocomplete="off"
-        autofocus
-      />
-      <button type="submit" aria-label="Pošalji">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+      <input id="message-input" type="text" placeholder="Napiši poruku..." aria-label="Tvoja poruka" autocomplete="off" maxlength="2000" />
+      <button id="send-button" type="submit" aria-label="Pošalji">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
           <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
         </svg>
       </button>
     </form>
-  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>

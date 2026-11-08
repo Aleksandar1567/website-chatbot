@@ -1,25 +1,34 @@
 {
   "name": "website-chatbot",
-  "version": "1.0.0",
-  "description": "A learning chatbot with a Node.js/Express backend and Google Gemini, powered by scraped ETF website content.",
+  "version": "2.0.0",
+  "description": "Paste a website URL and an API key to get a chatbot that adapts to the site, using hybrid RAG with Gemini, Claude or OpenAI.",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server.js",
-    "scrape": "node scrape.js"
+    "test": "node --test"
   },
   "keywords": [
     "chatbot",
+    "rag",
+    "hybrid-search",
     "express",
     "gemini",
-    "scraper"
+    "claude",
+    "openai"
   ],
   "license": "MIT",
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
-    "axios": "^1.20.0",
+    "@anthropic-ai/sdk": "^1.6.0",
+    "@google/genai": "^3.0.0",
+    "@huggingface/transformers": "^4.3.2",
     "cheerio": "^1.2.0",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "openai": "^7.53.0",
+    "robots-parser": "^3.0.1"
   }
 }
